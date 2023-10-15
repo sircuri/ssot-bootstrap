@@ -1,5 +1,9 @@
 #!/bin/bash
 
+echo -e "___  ____ ____ ___ ____ ___ ____ ____ ___     _   _ ____ _  _ ____    _  _ ____ ____ _  _ _ _  _ ____ \n|__] |  | |  |  |  [__   |  |__/ |__| |__]     \_/  |  | |  | |__/    |\/| |__| |    |__| | |\ | |___ \n|__] |__| |__|  |  ___]  |  |  \ |  | |         |   |__| |__| |  \    |  | |  | |___ |  | | | \| |___ \n                                                                                                      "
+
+echo "Verify github private key is available..."
+
 if [ ! -f ~/.ssh/github ]; then
 	echo ""
 	echo "Create the file ~/.ssh/github that contains the private key that can be used to access github in your name."
@@ -22,6 +26,7 @@ sudo apt install git
 eval "$(ssh-agent -s)"
 
 chmod 600 ~/.ssh/github
+echo "To use the private key for github, please provide your password of the private key."
 ssh-add ~/.ssh/github
 git clone git@github.com:sircuri/ssot-scripts.git
 cd ssot-scripts
