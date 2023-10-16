@@ -11,6 +11,10 @@ if [ ! -f ~/.ssh/github ]; then
     exit
 fi
 
+echo ""
+echo "This scripts need root permissions to continue. Please enter your root credentials..."
+echo ""
+
 sudo apt update
 
 # Mark script as non interactive
