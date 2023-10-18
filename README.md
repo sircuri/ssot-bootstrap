@@ -20,3 +20,7 @@ netsh interface ipv6 set global randomizeidentifiers=disable
 # Start script
 
 wget --inet4-only -O bootstrap.sh https://raw.githubusercontent.com/sircuri/ssot-bootstrap/main/bootstrap.sh && bash bootstrap.sh
+
+# Clean docker comtainers
+
+docker volume rm -f $(docker volume ls -f "dangling=true")
