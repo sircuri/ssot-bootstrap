@@ -12,8 +12,28 @@ if [ ! -f ~/.ssh/github ]; then
 fi
 
 echo ""
-echo "This scripts need root permissions to continue. Please enter your root credentials..."
+echo "The scripts need root permissions to continue. Please enter your root credentials..."
 echo ""
+
+if [[ $(sudo cat /proc/net/if_inet6) ]]; then
+    echo "IPv6 is enabled."
+else
+    echo "IPv6 is NOT enabled."
+
+	sudo chmod o-r /etc/netplan/01-netcfg.yaml
+	sudo sed -i "/net.ipv6.conf.all.disable_ipv6.*/d" /etc/sysctl.conf
+	sudo sysctl -q -p 
+	echo 0 | sudo tee /proc/sys/net/ipv6/conf/all/disable_ipv6 >/dev/null
+	sudo sed -i "s/#//" /etc/netplan/01-netcfg.yaml
+	sudo netplan generate
+	sudo netplan apply
+    echo
+	ifconfig 
+	echo
+    echo "IPv6 has been enabled now. Please restart the server before restarting these scripts."
+    echo
+	exit
+fi
 
 sudo apt update
 
@@ -26,7 +46,7 @@ if [ -f /etc/needrestart/needrestart.conf ]; then
   echo "Updated /etc/needrestart/needrestart.conf and changed 'i) nteractive' to 'l) ist only'"
 fi
 
-sudo apt install git
+sudo apt install -y git
 eval "$(ssh-agent -s)"
 
 chmod 600 ~/.ssh/github
