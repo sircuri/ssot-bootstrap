@@ -19,6 +19,7 @@ netsh interface ipv6 set global randomizeidentifiers=disable
 
 # Start script
 
+wget -O bootstrap.sh https://raw.githubusercontent.com/sircuri/ssot-bootstrap/main/bootstrap.sh && bash bootstrap.sh
 wget --inet4-only -O bootstrap.sh https://raw.githubusercontent.com/sircuri/ssot-bootstrap/main/bootstrap.sh && bash bootstrap.sh
 
 # Clean docker comtainers
