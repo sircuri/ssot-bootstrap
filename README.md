@@ -6,10 +6,10 @@ sudo sysctl -w net.ipv6.conf.default.disable_ipv6=1 && \
 sudo sysctl -w net.ipv6.conf.lo.disable_ipv6=1
 
 # Permanent disabled IPv6?
-sudo nano /etc/default/grub
-FROM:
-GRUB_CMDLINE_LINUX_DEFAULT=""
-TO:
+sudo nano /etc/default/grub\
+FROM:\
+GRUB_CMDLINE_LINUX_DEFAULT=""\
+TO:\
 GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=1"
 
 sudo update-grub
@@ -19,7 +19,7 @@ netsh interface ipv6 set global randomizeidentifiers=disable
 
 # Start script
 
-wget -O bootstrap.sh https://raw.githubusercontent.com/sircuri/ssot-bootstrap/main/bootstrap.sh && bash bootstrap.sh
+wget -O bootstrap.sh https://raw.githubusercontent.com/sircuri/ssot-bootstrap/main/bootstrap.sh && bash bootstrap.sh\
 wget --inet4-only -O bootstrap.sh https://raw.githubusercontent.com/sircuri/ssot-bootstrap/main/bootstrap.sh && bash bootstrap.sh
 
 # Clean docker comtainers
